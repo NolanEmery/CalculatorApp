@@ -3,10 +3,9 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 
 public class CalculatorAppGUI {
-    private static final int width = 1000;
+    private static final int width = 1000; //Open-Closed
     private static final int height = 500;
 
     private static double firstNumber;
@@ -24,10 +23,11 @@ public class CalculatorAppGUI {
     private static JButton jButtonMultiply;
     private static JButton jButtonDivide;
     private static JButton jButtonEquals;
-    private static File file;
+
+    private static ImplementFunctionality implementFunctionality;
 
     public static void main(String[] args) {
-        jFrame = new JFrame("Calculator App");
+        jFrame = new JFrame("Calculator App"); //build the background
         jFrame.setVisible(true);
         jFrame.setSize(width, height);
         jFrame.setLayout(new FlowLayout());
@@ -38,53 +38,50 @@ public class CalculatorAppGUI {
         Border border = new LineBorder(Color.BLACK);
         jPanel.setBorder(border);
         jPanel.setVisible(true);
-        file = new File("./output.txt");
 
-        jTextFieldFirstNumber = new JTextField(10);
+        jTextFieldFirstNumber = new JTextField(10); //put the input fields into place
         jTextFieldFirstNumber.setToolTipText("First Number");
         jTextFieldSecondNumber = new JTextField(10);
         jTextFieldSecondNumber.setToolTipText("Second Number");
-        jButtonAdd = new JButton("+");
-        jButtonAdd.setBackground(Color.orange);
-        jTextFieldResult = new JTextField(10);
-        jTextFieldResult.setEditable(false);
-        jButtonAdd.setToolTipText("Add");
+
+        implementFunctionality = new ImplementFunctionality();
+        implementFunctionality.setJButtonAdd();
+        jButtonAdd = implementFunctionality.getJButtonAdd();
         jButtonAdd.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 code = 0;
             }
         });
-        jButtonSubtract = new JButton("-");
-        jButtonSubtract.setBackground(Color.orange);
-        jButtonSubtract.setToolTipText("Subtract");
+        jTextFieldResult = new JTextField(10);
+        jTextFieldResult.setEditable(false);
+        implementFunctionality.setJButtonSub();
+        jButtonSubtract = implementFunctionality.getJButtonSub();
         jButtonSubtract.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 code = 1;
             }
         });
-        jButtonMultiply = new JButton("*");
-        jButtonMultiply.setBackground(Color.orange);
-        jButtonMultiply.setToolTipText("Multiply");
+
+        implementFunctionality.setJButtonMul();
+        jButtonMultiply = implementFunctionality.getJButtonMul();
         jButtonMultiply.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 code = 2;
             }
         });
-        jButtonDivide = new JButton("/");
-        jButtonDivide.setBackground(Color.orange);
-        jButtonDivide.setToolTipText("Divide");
+        implementFunctionality.setJButtonDiv();
+        jButtonDivide = implementFunctionality.getJButtonDiv();
         jButtonDivide.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 code = 3;
             }
         });
-        jButtonEquals = new JButton("=");
-        jButtonEquals.setBackground(Color.orange);
-        jButtonEquals.setToolTipText("Equals");
+        implementFunctionality.setJButtonEquals();
+        jButtonEquals = implementFunctionality.getJButtonEquals();
         jButtonEquals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
